@@ -20,25 +20,25 @@ urgent security fixes, no new features will be approved for TLS 1.2.
 This prescription does not pertain to DTLS (in any DTLS version); it pertains to
 TLS only. 
     ' name="description">
-<meta content="xml2rfc 3.17.5" name="generator">
+<meta content="xml2rfc 3.18.1" name="generator">
 <meta content="TLS" name="keyword">
 <meta content="features" name="keyword">
 <meta content="draft-rsalz-tls-tls12-frozen-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.17.5
-    Python 3.11.4
+  xml2rfc 3.18.1
+    Python 3.11.5
     ConfigArgParse 1.5.3
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.10.0
+    platformdirs 3.11.0
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.31.0
     setuptools 67.7.2
     six 1.16.0
-    wcwidth 0.2.6
+    wcwidth 0.2.8
 -->
 <link href="draft-rsalz-tls-tls12-frozen.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -661,7 +661,7 @@ sub, sup {
 }
 #toc nav li {
   line-height: 1.3em;
-  margin: 0.75em 0;
+  margin: 2px 0;
   padding-left: 1.2em;
   text-indent: -1.2em;
 }
@@ -754,7 +754,7 @@ hr.addr {
     z-index: 2;
     top: 0;
     right: 0;
-    padding: 0;
+    padding: 1px 0 0 0;
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
@@ -878,16 +878,13 @@ hr.addr {
     border-top: none;
     padding-top: 0;
   }
-  figure, pre {
+  figure, pre, .vcard {
     page-break-inside: avoid;
-  }
-  figure {
-    overflow: scroll;
   }
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
   }
-  h2+*, h3+*, h4+*, h5+*, h6+* {
+  :is(h2, h3, h4, h5, h6)+*, dd {
     page-break-before: avoid;
   }
   pre {
@@ -900,6 +897,9 @@ hr.addr {
   }
   td {
     border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
   }
 }
 
@@ -1001,28 +1001,6 @@ address div.right {
   text-align: right;
 }
 
-/* Give the table caption label the same styling as the figcaption */
-
-@media print {
-  .toplink {
-    display: none;
-  }
-
-  /* avoid overwriting the top border line with the ToC header */
-  #toc {
-    padding-top: 1px;
-  }
-
-  /* Avoid page breaks inside dl and author address entries */
-  dd {
-    page-break-before: avoid;
-  }
-  .vcard {
-    page-break-inside: avoid;
-  }
-
-}
-
 /* Dark mode. */
 @media (prefers-color-scheme: dark) {
 :root {
@@ -1059,11 +1037,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">tls1.2-frozen</td>
-<td class="right">August 2023</td>
+<td class="right">October 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salz &amp; Aviram</td>
-<td class="center">Expires 15 February 2024</td>
+<td class="center">Expires 7 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1054,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-rsalz-tls-tls12-frozen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-08-14" class="published">14 August 2023</time>
+<time datetime="2023-10-05" class="published">5 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-02-15">15 February 2024</time></dd>
+<dd class="expires"><time datetime="2024-04-07">7 April 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1143,7 +1121,7 @@ TLS only.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 February 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1217,22 +1195,25 @@ TLS only.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 security properties. However, this protocol version suffers from several
 deficiencies:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-2">
-<li id="section-1-2.1">While application layer traffic is always encrypted, most of the handshake
+<li id="section-1-2.1">
+          <p id="section-1-2.1.1">While application layer traffic is always encrypted, most of the handshake
 messages are not encrypted. Therefore, the privacy provided is suboptimal.
-This is a protocol issue that cannot be addressed by configuration.<a href="#section-1-2.1" class="pilcrow">¶</a>
+This is a protocol issue that cannot be addressed by configuration.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-1-2.2">The list of cryptographic primitives specified for the protocol, both in-use
+        <li id="section-1-2.2">
+          <p id="section-1-2.2.1">The list of cryptographic primitives specified for the protocol, both in-use
 primitives and deprecated ones, includes several primitives that were a source for
 vulnerabilities throughout the years, such as RSA key exchange, CBC cipher suites,
 and problematic finite-field Diffie-Hellman group negotiation.
 This deficiency may be addressed through proper configuration; however,
 experience shows that configuration mistakes are common, especially when
 deploying cryptography.
-See <a href="#sec-considerations" class="auto internal xref">Section 4</a> for elaboration.<a href="#section-1-2.2" class="pilcrow">¶</a>
+See <a href="#sec-considerations" class="auto internal xref">Section 4</a> for elaboration.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-1-2.3">The original protocol, as-is, does not provide security due to the
+        <li id="section-1-2.3">
+          <p id="section-1-2.3.1">The original protocol, as-is, does not provide security due to the
 "Renegotiation" class of attacks (see <a href="#sec-considerations" class="auto internal xref">Section 4</a>). Rather, some
-extensions are required to provide security.<a href="#section-1-2.3" class="pilcrow">¶</a>
+extensions are required to provide security.<a href="#section-1-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <p id="section-1-3">In contrast, TLS 1.3 <span>[<a href="#TLS13" class="cite xref">TLS13</a>]</span> is also in
@@ -1334,9 +1315,11 @@ BEAST <span>[<a href="#BEAST" class="cite xref">BEAST</a>]</span>, Logjam <span>
 <p id="section-5-1">IANA will stop accepting registrations for any TLS parameters <span>[<a href="#TLS13REG" class="cite xref">TLS13REG</a>]</span>
 except for the following:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-2.1">TLS Exporter Labels<a href="#section-5-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5-2.1">
+          <p id="section-5-2.1.1">TLS Exporter Labels<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-2.2">TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs<a href="#section-5-2.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-5-2.2">
+          <p id="section-5-2.2.1">TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-5-3">Entries in any other TLS protocol registry should have an indication like
@@ -1347,6 +1330,7 @@ except for the following:<a href="#section-5-1" class="pilcrow">¶</a></p>
       <h2 id="name-references">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
 <section id="section-6.1">
         <h3 id="name-normative-references">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -1394,6 +1378,8 @@ except for the following:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
+<div id="sec-informative-references">
 <section id="section-6.2">
         <h3 id="name-informative-references">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
@@ -1457,6 +1443,7 @@ except for the following:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
 </section>
 <div id="acknowledgments">
 <section id="appendix-A">
