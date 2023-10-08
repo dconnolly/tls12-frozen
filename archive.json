@@ -1,52 +1,22 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-08-15T00:55:25.470629+00:00",
+  "timestamp": "2023-10-08T01:01:53.167046+00:00",
   "repo": "richsalz/tls12-frozen",
   "labels": [
-    {
-      "name": "bug",
-      "description": "Something isn't working",
-      "color": "d73a4a"
-    },
-    {
-      "name": "documentation",
-      "description": "Improvements or additions to documentation",
-      "color": "0075ca"
-    },
-    {
-      "name": "duplicate",
-      "description": "This issue or pull request already exists",
-      "color": "cfd3d7"
-    },
-    {
-      "name": "enhancement",
-      "description": "New feature or request",
-      "color": "a2eeef"
-    },
-    {
-      "name": "good first issue",
-      "description": "Good for newcomers",
-      "color": "7057ff"
-    },
-    {
-      "name": "help wanted",
-      "description": "Extra attention is needed",
-      "color": "008672"
-    },
-    {
-      "name": "invalid",
-      "description": "This doesn't seem right",
-      "color": "e4e669"
-    },
-    {
-      "name": "question",
-      "description": "Further information is requested",
-      "color": "d876e3"
-    },
     {
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "uta",
+      "description": "For the UTA WG draft",
+      "color": "f9d0c4"
+    },
+    {
+      "name": "tls",
+      "description": "For the TLS WG draft",
+      "color": "006b75"
     }
   ],
   "issues": [
@@ -71,16 +41,24 @@
       "id": "I_kwDOJeA3Os5srmCC",
       "title": "split into two drafts",
       "url": "https://github.com/richsalz/tls12-frozen/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "richsalz",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "The \"other protocols\" section should be its own draft, and sent to UTA",
       "createdAt": "2023-07-26T23:46:02Z",
-      "updatedAt": "2023-07-26T23:46:02Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2023-10-06T12:58:38Z",
+      "closedAt": "2023-10-06T12:58:38Z",
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "Done, closing.",
+          "createdAt": "2023-10-06T12:58:38Z",
+          "updatedAt": "2023-10-06T12:58:38Z"
+        }
+      ]
     },
     {
       "number": 5,
@@ -103,15 +81,15 @@
       "id": "I_kwDOJeA3Os5tgbgF",
       "title": "Clarify this is just for TLS 1.2 proper, not DTLS 1.2",
       "url": "https://github.com/richsalz/tls12-frozen/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonathanLennox",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Given the slow progress of implementations of DTLS 1.3, I think this draft needs to be clear that this feature freeze applies only to TLS 1.2 proper, not DTLS 1.2.\r\n\r\nFor example, I would be very sad if any new DTLS-SRTP protection profiles could only be negotiated with DTLS 1.3.\r\n\r\nThis may have implications for the IANA instructions section, for registries that are shared between the two protocols.",
       "createdAt": "2023-08-04T19:06:59Z",
-      "updatedAt": "2023-08-07T18:53:24Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-06T12:59:45Z",
+      "closedAt": "2023-10-06T12:59:44Z",
       "comments": [
         {
           "author": "JonathanLennox",
@@ -140,8 +118,33 @@
           "body": "There's an active discussion on the TLS list (pardon me for linking to myself...):\r\nhttps://mailarchive.ietf.org/arch/msg/tls/PvBUJFCOyQZ1cD6StRJeda6pB_U/\r\n\r\nYou should probably contribute there if you feel strongly.",
           "createdAt": "2023-08-07T18:53:23Z",
           "updatedAt": "2023-08-07T18:53:23Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "Both drafts now say \"this is only about TLS, not DTLS.\"  Thanks for the feedback.  Closing.",
+          "createdAt": "2023-10-06T12:59:44Z",
+          "updatedAt": "2023-10-06T12:59:44Z"
         }
       ]
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOJeA3Os5zC7eV",
+      "title": "Since this modified RFC 9325 ...",
+      "url": "https://github.com/richsalz/tls12-frozen/issues/9",
+      "state": "OPEN",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [
+        "uta"
+      ],
+      "body": "From @stpeter email to the UTA WG: RFC 9325 (BCP195) says that new protocols must support TLS 1.2 and TLS 1.3. Since this document says MUST 1.3 and MAY 1.2, two things need to happen:\r\n\r\n- This must be marked as updating 9325 and explain what the changes are;\r\n- This must be part of BCP 195 and not informational.\r\n\r\nMore detaikls in Peter's email at https://mailarchive.ietf.org/arch/msg/uta/jkj0nSxHybzX0KrDwYxgfYvxfAg/",
+      "createdAt": "2023-10-06T13:06:14Z",
+      "updatedAt": "2023-10-06T13:06:14Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
